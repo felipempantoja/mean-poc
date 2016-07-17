@@ -1,0 +1,30 @@
+<h1 class="text-center">Contato</h1>
+
+<p ng-show="mensagem.texto">
+    {{mensagem.texto}}
+</p>
+
+<form>
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" id="nome" name="nome" required ng-model="vm.contato.nome">
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <div class="input-group">
+            <span class="input-group-addon">@</span>
+            <input type="email" class="form-control" placeholder="email@exemplo.com" 
+                id="email" name="email" required ng-model="vm.contato.email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="emergencia">Emergência</label>
+        <select name="emergencia" id="emergencia" class="form-control" 
+            ng-model="vm.contato.emergencia" ng-options="contato._id as contato.nome for contato in vm.contatos">
+        </select>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary" ng-click="vm.salvar()">Salvar</button>
+        <a href="#/contatos" class="btn btn-default">Voltar</a>
+    </div>
+</form>
