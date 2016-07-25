@@ -1,8 +1,4 @@
-var contatos = [
-    {_id: 1, nome: 'Contato Exemplo 1', email: 'cont1@empresa.com.br'},
-    {_id: 2, nome: 'Contato Exemplo 2', email: 'cont2@empresa.com.br'},
-    {_id: 3, nome: 'Contato Exemplo 3', email: 'cont3@empresa.com.br'}
-];
+var sanitize = require('mongo-sanitize');
 
 module.exports = function(app) {
     var Contato = app.models.contato;
@@ -10,12 +6,13 @@ module.exports = function(app) {
     return {
 
         listar: function(req, res) {
-            var promise = Contato.find().populate('emergencia').exec().then(function(contatos) {
-                res.json(contatos);
-            }, function(erro) {
-                console.error(erro);
-                res.status(500).json(erro);
-            });
+            var promise = Contato.find().populate('emergencia').exec()
+                .then(function(contatos) {
+                    res.json(contatos);
+                }, function(erro) {
+                    console.error(erro);
+                    res.status(500).json(erro);
+                });
         },
 
         obter: function(req, res) {
@@ -30,9 +27,15 @@ module.exports = function(app) {
         },
 
         salvar: function(req, res) {
-            var contato = req.body;
-            if(contato._id) {
-                Contato.findByIdAndUpdate(contato._id, contato).exec()
+            //Evitando atualizacao de atributo interno
+            var contato = {
+                nome: req.body.nome,
+                email: req.body.email,
+                emergencia: req.body.emergencia
+            };
+
+            if(req.body._id) {
+                Contato.findByIdAndUpdate(req.body._id, contato).exec()
                     .then(function(contato) {
                         res.json(contato);
                     }, function(erro) {
@@ -51,16 +54,13 @@ module.exports = function(app) {
         },
 
         remover: function(req, res) {
-            var promise = Contato.remove({'_id': req.params.id}).exec()
+            var id = sanitize(req.params.id);
+            Contato.remove({'_id': id}).exec()
                 .then(function() {
                     res.end();
                 }, function(erro) {
                     return console.error(erro);
                  });
-
-            var id = req.params.id;
-            contatos = contatos.filter(function(e) { return e._id != id; });
-            res.status(204).end();
         }
     };
 }

@@ -1,3 +1,5 @@
+"use strict";
+
 var app = angular.module('mean-poc', ['ngRoute', 'ngResource']);
 
 app.config(function($routeProvider) {
@@ -15,5 +17,14 @@ app.config(function($routeProvider) {
     });
 
     $routeProvider.otherwise({redirectTo: '/contatos'});
+});
 
+app.controller('MainController', function($rootScope) {
+    var vm = this;
+
+    vm.mensagem = null;
+
+    $rootScope.$on('event:mensagem', function(event, data) {
+        vm.mensagem = data;
+    });
 });

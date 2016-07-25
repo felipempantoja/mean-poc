@@ -1,11 +1,13 @@
+var authRequired = require('../../config/auth');
+
 module.exports = function(app) {
     var controller = app.controllers.contato;
 
     app.route('/contatos')
-        .get(controller.listar)
-        .post(controller.salvar);
+        .get(authRequired, controller.listar)
+        .post(authRequired, controller.salvar);
 
     app.route('/contatos/:id')
         .get(controller.obter)
-        .delete(controller.remover);
+        .delete(authRequired, controller.remover);
 }

@@ -1,9 +1,5 @@
 <h1 class="text-center">Contato</h1>
 
-<p ng-show="mensagem.texto">
-    {{mensagem.texto}}
-</p>
-
 <form>
     <div class="form-group">
         <label for="nome">Nome</label>
@@ -21,6 +17,7 @@
         <label for="emergencia">Emergência</label>
         <select name="emergencia" id="emergencia" class="form-control" 
             ng-model="vm.contato.emergencia" ng-options="contato._id as contato.nome for contato in vm.contatos">
+            <option value="">Selecione</option>
         </select>
     </div>
     <div>
