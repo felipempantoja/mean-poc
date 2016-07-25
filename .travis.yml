@@ -7,6 +7,7 @@ before_install:
   - npm install -g bower
   - npm install grunt --save-dev
   - npm install -g grunt-cli
+  - npm install grunt-contrib-copy grunt-contrib-clean grunt-contrib-concat grunt-contrib-uglify grunt-contrib-cssmin grunt-usemin grunt-ng-annotate --save-dev
   - npm install karma --save-dev
   - npm install -g karma-cli
   - npm install -g protractor
