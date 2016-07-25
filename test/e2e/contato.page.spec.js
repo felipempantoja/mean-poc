@@ -18,6 +18,6 @@ describe('Página de Cadastro de Contatos', function() {
         page.emergencia(0);
         page.salvar();
 
-        expect(page.mensagem()).toContain('Contato salvo com sucesso!');
+        expect(page.mensagem()).toEqual('Contato salvo com sucesso!');
     });
 });
