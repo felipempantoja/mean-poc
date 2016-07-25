@@ -5,7 +5,10 @@ notifications:
   - felipempantoja@gmail.com
 before_install:
   - npm install -g bower
+  - npm install grunt --save-dev
   - npm install -g grunt-cli
+  - npm install karma --save-dev
+  - npm install karma-core --save-dev
   - npm install -g karma-cli
   - npm install -g protractor
   - npm install karma-phantomjs-launcher --save-dev
