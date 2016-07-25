@@ -15,6 +15,7 @@ before_install:
   - webdriver-manager update
   - cd public
   - bower install
+  - cd ..
 before_script:
   - grunt
   - cd dist
