@@ -11,7 +11,7 @@ before_install:
   - npm install karma --save-dev
   - npm install -g karma-cli
   - npm install -g protractor
-  - npm install karma-phantomjs-launcher --save-dev
+  - npm install karma-phantomjs2-launcher --save-dev
   - webdriver-manager update
   - cd public
   - bower install
@@ -20,4 +20,4 @@ before_script:
   - grunt
   - cd dist
 script:
-  - karma start config/karma.config.js --single-run --browsers PhantomJS
+  - karma start config/karma.config.js --single-run --browsers PhantomJS2
