@@ -1,3 +1,4 @@
+module.exports = {
     env: 'test',
     db: 'mongodb://localhost/mean-poc-test',
     sauceTestName: 'Mean-POC Testing',
