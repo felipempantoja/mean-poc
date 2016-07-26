@@ -1,8 +1,15 @@
+env:
+  global:
+    NODE_ENV: test
 language: node_js
 node_js:
   - 6.2.2
 notifications:
   - felipempantoja@gmail.com
+addons:
+  sauce_connect: true
+services:
+  - mongodb
 before_install:
   - npm install -g bower
   - npm install grunt --save-dev
@@ -17,7 +24,10 @@ before_install:
   - bower install
   - cd ..
 before_script:
+  - node test/data.js
   - grunt
   - cd dist
 script:
   - karma start config/karma.config.js --single-run --browsers PhantomJS
+  - node server &
+  - protractor config/protractor.js
